@@ -31,7 +31,7 @@ public class Board {
         if(rankCount == 1) System.out.println("Winner Winner Chicken Dinner "+ player.getName()+ " won the game with rank " + rankCount);
         else if(rankCount == 2) System.out.println("Booyah Booyah Booyah "+ player.getName()+ "won the game with rank "+ rankCount);
         else System.out.println("Your rank is "+ rankCount);
-        rankCount++;
+       
     }
 
     void startGame(){
@@ -53,6 +53,7 @@ public class Board {
                 System.out.println("The value exits the board size, better luck for the next turn");
             }else if(nextValue == boardSize){
                 getWinnerCard(player, rankCount);
+                rankCount++;
                 continue;
             }else {
                for(Snake snake : snakes){
@@ -70,6 +71,7 @@ public class Board {
                }
                if(ladderTaken && nextValue == boardSize){
                  getWinnerCard(player, rankCount);
+                 rankCount++;
                }
                currentPostion.put(player.getId(), nextValue); 
             }
@@ -84,7 +86,13 @@ public class Board {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Queue<Player> currentPlayers = new LinkedList<>();
-        int noOfPlayers = 3;
+        System.out.println("Enter the number of dice");
+        int noOfDice = in.nextInt();
+        System.out.println("Enter board size");
+        int boardSize = in.nextInt();
+        System.out.println("Enter Number of players ");
+        int noOfPlayers = in.nextInt();
+        in.nextLine();
         ArrayList<Player> players = new ArrayList<>();
         for(int i = 0; i < noOfPlayers; i++){
             System.out.println("Please enter the name for player " + i + " ");
@@ -110,7 +118,7 @@ public class Board {
             currentPosition.put(players.get(i).getId(), 1);
         }
 
-        Board board = new Board(new Dice(2),ladders ,snakes,currentPlayers ,10,currentPosition);
+        Board board = new Board(new Dice(noOfDice),ladders ,snakes,currentPlayers ,boardSize,currentPosition);
         board.startGame();
         
     }
