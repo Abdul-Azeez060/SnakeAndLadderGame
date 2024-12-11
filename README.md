@@ -38,6 +38,10 @@ Responsible for simulating dice rolls based on the number of dice.
 
 Represents a ladder on the board with a starting and ending position.
 
+### Snake
+
+Represents a snake on the board with a starting and ending position.
+
 ### Player
 
 Holds player details like name, unique button, and ID.
