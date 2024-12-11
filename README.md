@@ -57,8 +57,8 @@ The main class handling the game logic, interactions between players, dice, snak
   - Start: 2, End: 6
   - Start: 4, End: 9
 - Snakes:
-  - Start: 7, End: 9
-- Dice: 2
+  - Start: 9, End: 3
+- Dice: 1
 
 ## Known Limitations
 
