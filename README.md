@@ -24,7 +24,7 @@ This project implements a console-based Snakes and Ladders game using Java. The 
    ```
 3. Run the `Board` class to start the game:
    ```bash
-   java Board
+   java Game
    ```
 4. Follow the on-screen instructions to input player details and play the game.
 
