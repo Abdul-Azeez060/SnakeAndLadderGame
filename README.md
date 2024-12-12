@@ -38,6 +38,10 @@ Responsible for simulating dice rolls based on the number of dice.
 
 Represents a ladder on the board with a starting and ending position.
 
+### Snake
+
+Represents a snake on the board with a starting and ending position.
+
 ### Player
 
 Holds player details like name, unique button, and ID.
@@ -53,8 +57,8 @@ The main class handling the game logic, interactions between players, dice, snak
   - Start: 2, End: 6
   - Start: 4, End: 9
 - Snakes:
-  - Start: 7, End: 9
-- Dice: 2
+  - Start: 9, End: 3
+- Dice: 1
 
 ## Known Limitations
 
