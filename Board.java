@@ -50,7 +50,7 @@ public class Board {
             System.out.println("Dice rolled "+ value);
             int nextValue = currentValue + value;
             if(nextValue > boardSize){
-                System.out.println("The value exits the board size, better luck for the next turn");
+                System.out.println("The value exits the "+ boardSize +", better luck for the next turn");
             }else if(nextValue == boardSize){
                 getWinnerCard(player, rankCount);
                 rankCount++;
@@ -59,14 +59,15 @@ public class Board {
                for(Snake snake : snakes){
                 if(snake.startPos == nextValue){
                     nextValue = snake.endPos;
-                    System.out.println("ooh Snake bite at "+ snake.startPos);
+                    System.out.println("ooh Snake bite at "+ snake.startPos + " --> " + snake.endPos);
                 }
                }
                boolean ladderTaken = false;
                for(Ladder ladder : ladders){
                 if(ladder.startPos == nextValue){
-                    nextValue = ladder.startPos;
+                    nextValue = ladder.endPos;
                     ladderTaken = true;
+                    System.out.println("Lucky you, there is a ladder at "+ ladder.startPos+ " --> " + ladder.endPos);
                 }
                }
                if(ladderTaken && nextValue == boardSize){
@@ -77,49 +78,11 @@ public class Board {
             }
             nextValue = (nextValue > boardSize) ? (currentValue) : (nextValue);
             int remaining = boardSize-nextValue;
-            System.out.println(player.getName() + " current position is "+ nextValue + " remaining steps "+ remaining );
+            System.out.println(player.getName() +" "+ currentValue+ " --> " + nextValue + " remaining steps "+ remaining );
             currentPlayers.add(player);
             System.out.println();
         }
 
     }
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Queue<Player> currentPlayers = new LinkedList<>();
-        System.out.println("Enter the number of dice");
-        int noOfDice = in.nextInt();
-        System.out.println("Enter board size");
-        int boardSize = in.nextInt();
-        System.out.println("Enter Number of players ");
-        int noOfPlayers = in.nextInt();
-        in.nextLine();
-        ArrayList<Player> players = new ArrayList<>();
-        for(int i = 0; i < noOfPlayers; i++){
-            System.out.println("Please enter the name for player " + i + " ");
-            String name = in.nextLine();
-            System.out.println("Please enter the unique button for this player ");
-            char button = in.next().charAt(0);
-            in.nextLine();
-            Player player = new Player(name, button);
-            // Player player2 = new Player("Prithvi");
-            // Player player3 = new Player("Chakri");
-            // Player player4 = new Player("Shiva Ram");
-            players.add(player);
-            currentPlayers.add(player);
-        }
-       
-        ArrayList<Ladder> ladders = new ArrayList<>();
-        ladders.add(new Ladder(2, 6));
-        ladders.add(new Ladder(4, 9));
-        ArrayList<Snake> snakes = new ArrayList<>();
-        snakes.add(new Snake(7, 9));
-        HashMap<Integer, Integer> currentPosition = new HashMap<>();
-        for(int i = 0; i < noOfPlayers; i++){
-            currentPosition.put(players.get(i).getId(), 1);
-        }
-
-        Board board = new Board(new Dice(noOfDice),ladders ,snakes,currentPlayers ,boardSize,currentPosition);
-        board.startGame();
-        
-    }
+  
 }

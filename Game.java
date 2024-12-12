@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 public class Game {
      public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        HashSet<Character> set = new HashSet<>();
         Queue<Player> currentPlayers = new LinkedList<>();
         System.out.println("Enter the number of dice");
         int noOfDice = in.nextInt();
@@ -21,6 +23,11 @@ public class Game {
             String name = in.nextLine();
             System.out.println("Please enter the unique button for this player ");
             char button = in.next().charAt(0);
+            while(set.contains(button)){
+                System.out.println(button + " is already taken by others please enter unique button");
+                button =  in.next().charAt(0);
+            }
+            set.add(button);
             in.nextLine();
             Player player = new Player(name, button);
             players.add(player);
@@ -31,7 +38,7 @@ public class Game {
         ladders.add(new Ladder(2, 6));
         ladders.add(new Ladder(4, 9));
         ArrayList<Snake> snakes = new ArrayList<>();
-        snakes.add(new Snake(7, 9));
+        snakes.add(new Snake(9, 7));
         HashMap<Integer, Integer> currentPosition = new HashMap<>();
         for(int i = 0; i < noOfPlayers; i++){
             currentPosition.put(players.get(i).getId(), 1);
@@ -40,6 +47,9 @@ public class Game {
         Board board = new Board(new Dice(noOfDice),ladders ,snakes,currentPlayers ,boardSize,currentPosition);
         board.startGame();
         in.close();
+
+     
+
         
     }
 }
